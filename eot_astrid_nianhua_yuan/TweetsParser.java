@@ -15,6 +15,7 @@ public class TweetsParser {
 	List<String> creation_time;
 	
 	public TweetsParser() {
+		//initialize Lists
 		coords = new ArrayList<Coordinate>();
 		tweets = new ArrayList<String>();
 		userIDs = new ArrayList<String>();
