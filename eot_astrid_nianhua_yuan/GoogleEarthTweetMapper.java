@@ -48,18 +48,23 @@ public class GoogleEarthTweetMapper {
 		
 		
 		//----------------------------------------------------------------------------------
+		// create a TweetsParser object
 		TweetsParser p = new TweetsParser();
+		// Parse the tweets csv file
 		p.parseTweetsData(tweetsPath);
+		// get all the data columns
 		List<Coordinate> coords = p.getCoords();
 		List<String> tweets = p.getTweets();
 		List<String> userIDs = p.getUserIDs();
 		List<String> creation_time = p.getCreationTime();
 	    
-		for(int i = 0; i < coords.size(); i++) {
-			String coordinates = coords.get(i).getLon() + "," + coords.get(i).getLat();
+		for(int i = 0; i < coords.size(); i++) {		
 			String tweet = tweets.get(i);
 			String userID = userIDs.get(i);
 			String creationTime = creation_time.get(i);
+			//Extruding the attribute 'userID' using the third component of coordinates
+			String coordinates = coords.get(i).getLon() + "," + coords.get(i).getLat() + "," + (Double.parseDouble(userIDs.get(i))/5000);
+			// add the placemarks to the kml file
 			kml_constrct.addPlaceMarker(Integer.toString(i+1), coordinates, tweet, userID, creationTime);
 		}
 		
