@@ -27,14 +27,21 @@ public class KMLFileConstructor {
 	}
 	
 	public void addPlaceMarker(String i, String coordinates, String tweet, String userID, String creationTime) {
-	    String placeMarker = "	<Placemark>\r\n"
+	    // this method generates <PlaceMark> tag using the parameters including coordinates and attributes
+		String placeMarker = "	<Placemark>\r\n"
 	    		+ "		<name>Tweet no."+i+"</name>\r\n"
-	    		+ "		<description>\r\n"
-	    		+ "			Tweet: "+tweet+ "\r\nCreated by: "+ userID +"\r\nAt " + creationTime
-	    		+ "		</description>\r\n"
-	    		+ "		<extrude>10</extrude>\r\n"
+	    		//+ "	<description>\r\n"
+	    		//+ "		Tweet: "+tweet+ "\r\n\t\t Created by: "+ userID +"\r\n\t\t At " + creationTime
+	    		//+ "	</description>\r\n"
+	    		+ "		<ExtendedData>\n"		//Visualize the columns ¡°tweet¡± and ¡°created_at¡± in the <ExtendedData> tag
+                + "			<Data name=\"Tweet\"> " + "<value>" + tweet + "</value> </Data>\n"
+                + "			<Data name=\"Created by\"> " + "<value> UserID:" + userID + "</value> </Data>\n"
+                + "			<Data name=\"Created at\" >" + "<value>" + creationTime + "</value> </Data>\n"
+                + "		</ExtendedData>\n"   
 	    		+ "		<Point>\r\n"
 	    		+ "			<coordinates>"+coordinates+"</coordinates> \r\n"
+	    		+ "			<altitudeMode>relativeToGround</altitudeMode>\r\n"
+	    		+ "			<extrude>1</extrude>\r\n"	//extrude the point using the attribute value
 	    		+ "		</Point>\r\n"
 	    		+ "		<TimeStamp>\r\n"
 	    		+ "			<when>"+creationTime+"</when>\r\n"
@@ -44,9 +51,10 @@ public class KMLFileConstructor {
 	}
 
 	public void addGroundOverlay(String id, String name, String color, String[] LatLonBox, String href) {
+		// this method generate <GroundOverlay> tag using the parameters including name, transparency, bbox, image path
 		String groundOverlay = "	<GroundOverlay id=\""+id+"\">\r\n"
 				+ "		<name>"+name+"</name>\r\n"	
-				+"		<color>"+color+"</color>\r\n"
+				+"		<color>"+color+"</color>\r\n" // transparency is defined in the 'color' string
 				+ "		<Icon>\r\n"
 				+ "			<href>"+href+"</href>\r\n"
 				+ "		</Icon>\r\n"
