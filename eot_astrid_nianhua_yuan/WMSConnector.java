@@ -34,6 +34,7 @@ public class WMSConnector {
 	
 	public void setGetMapRequestParams(String layerName, String layerStyle, String wmsVersion, String srs,
 			String bbox, boolean tranparency, String imgWidth, String imgHeight, String imgFormat) {
+		// set all the parameters of the GetMap() request
 		this.layerName = layerName;
 		this.layerStyle = layerStyle;
 		this.wmsVersion = wmsVersion;
@@ -46,6 +47,7 @@ public class WMSConnector {
 	}
 	
 	public void setImgPath(String imgPath) {
+		// set the path of image to store the wms map
 		this.imgPath = imgPath;
 	}
 	
