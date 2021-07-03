@@ -26,7 +26,7 @@ public class TweetsParser {
 		try {
 			URL tweetsURL = new URL(tweetsPath);
 			Scanner s = new Scanner(tweetsURL.openStream());
-			int i = -1;
+			int i = -1; // using '-1' as initial value to skip the first row
 			while(s.hasNext()) {				
 				//get next line
 				String row = s.nextLine();
